@@ -11,6 +11,13 @@ Requirements
 Role Variables
 --------------
 
+The variable `nodeId` should be defined at host level and indicates the zookeeper instance id:
+
+    [zookeeper]
+    zk1.local nodeId=1
+    zk2.local nodeId=2
+    zk3.local nodeId=3
+
 following variables are used for installing `Apache Zookeeper` on the host:
 
     java_home: /opt/java/default
