@@ -1,0 +1,58 @@
+---
+- name: check tar installation
+  apt:
+    name: tar
+
+- name: check unzip installation
+  apt:
+    name: unzip
+
+- name: create zookeeper user
+  user:
+    name: zookeeper
+    shell: /bin/bash
+    home: "{{ zookeeper_installation_path }}"
+
+- name: check {{ dataDir }} directory existense
+  file:
+    path: "{{ dataDir }}"
+    state: directory
+    owner: zookeeper
+    group: zookeeper
+
+- name: updating zookeeper myid file
+  template:
+    src: myid.j2
+    dest: "{{ dataDir }}/myid"
+    owner: zookeeper
+    group: zookeeper
+
+- name: check if bin folder exists.
+  stat:
+    path: "{{ zookeeper_installation_path }}/bin"
+  register: binaryFolder
+
+- name: unarchive package
+  unarchive:
+    src: "{{ zookeeper_url }}"
+    dest: '{{ zookeeper_installation_path }}'
+    copy: false
+    owner: zookeeper
+    group: zookeeper
+    extra_opts:
+      - --strip-components=1
+  when: not binaryFolder.stat.exists
+
+- name: updating zoo.cfg file
+  template:
+    src: "{{ zookeeper_config_template }}"
+    dest: "{{ zookeeper_installation_path }}/conf/zoo.cfg"
+    owner: zookeeper
+    group: zookeeper
+  notify: restart zookeeper service
+
+- name: updating zookeeper.service systemd file
+  template:
+    src: "{{ zookeeper_service_template }}"
+    dest: /lib/systemd/system/zookeeper.service
+  notify: restart zookeeper service

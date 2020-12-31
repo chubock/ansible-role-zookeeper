@@ -1,0 +1,18 @@
+---
+
+java_home: /opt/java/default
+zookeeper_installation_path: /var/lib/zookeeper
+zookeeper_url: https://apache.mirror.digionline.de/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
+zookeeper_config_template: zoo.cfg.j2
+zookeeper_service_template: zookeeper.service.j2
+
+tickTime: 2500
+dataDir: /data/zookeeper
+clientPort: 2181
+maxClientCnxns: 80
+admin:
+  enableServer: true
+  serverPort: 8080
+initLimit: 10
+syncLimit: 5
+hosts: "{{ groups['zookeeper'] }}"

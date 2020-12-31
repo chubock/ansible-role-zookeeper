@@ -1,0 +1,20 @@
+[Unit]
+Description=Zookeeper
+Documentation=http://zookeeper.apache.org
+Requires=network.target
+After=network.target
+
+[Service]
+Type=forking
+User=zookeeper
+Group=zookeeper
+WorkingDirectory={{ zookeeper_installation_path }}
+Environment=JAVA_HOME={{ java_home }}
+ExecStart={{ zookeeper_installation_path }}/bin/zkServer.sh start {{ zookeeper_installation_path }}/conf/zoo.cfg
+ExecStop={{ zookeeper_installation_path }}/bin/zkServer.sh stop {{ zookeeper_installation_path }}/conf/zoo.cfg
+ExecReload={{ zookeeper_installation_path }}/bin/zkServer.sh restart {{ zookeeper_installation_path }}/conf/zoo.cfg
+TimeoutSec=30
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

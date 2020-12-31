@@ -1,0 +1,11 @@
+tickTime={{ tickTime }}
+dataDir={{ dataDir }}
+clientPort={{ clientPort }}
+maxClientCnxns={{ maxClientCnxns }}
+admin.enableServer={{ admin.enableServer }}
+initLimit={{ initLimit }}
+syncLimit={{ syncLimit }}
+admin.serverPort={{ admin.serverPort}}
+{% for host in hosts %}
+server.{{ hostvars[host].nodeId }}={{ host }}:2888:3888
+{% endfor %}
