@@ -19,6 +19,7 @@
     state: directory
     owner: zookeeper
     group: zookeeper
+    recurse: true
 
 - name: updating zookeeper myid file
   template:
