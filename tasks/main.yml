@@ -56,3 +56,9 @@
     src: "{{ zookeeper_service_template }}"
     dest: /lib/systemd/system/zookeeper.service
   notify: restart zookeeper service
+
+- name: start zookeeper service
+  systemd:
+    name: zookeeper
+    state: started
+    enabled: true
