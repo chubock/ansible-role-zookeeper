@@ -1,5 +1,5 @@
 galaxy_info:
-  role: zookeeper
+  role_name: zookeeper
   author: Hassan Moosavi
   description: Installs Apache Zookeeper cluster
 
