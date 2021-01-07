@@ -20,10 +20,24 @@ The variable `nodeId` should be defined at host level and indicates the zookeepe
 
 following variables are used for installing `Apache Zookeeper` on the host:
 
+java home path:
+
     java_home: /opt/java/default
+    
+where to install: 
+   
     zookeeper_installation_path: /var/lib/zookeeper
+    
+where to download binaries from:    
+    
     zookeeper_url: https://apache.mirror.digionline.de/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
+    
+zookeeper configuration template file:
+    
     zookeeper_config_template: zoo.cfg.j2
+    
+zookeeper systemd service template file:
+    
     zookeeper_service_template: zookeeper.service.j2
     
 following variables are used to configure `Apache Zookeeper`:
